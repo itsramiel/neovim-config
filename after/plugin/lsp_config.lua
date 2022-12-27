@@ -16,11 +16,16 @@ local on_attach = function()
 
 	-- code actions
 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {buffer = 0})
-end 
+end
+
+lspConfig.rust_analyzer.setup{
+	capabilities = capabilities,
+	on_attach = on_attach,
+}
 
 lspConfig.tsserver.setup{
 	capabilities = capabilities,
-	on_attach = on_attach, 
+	on_attach = on_attach,
 }
 
 lspConfig.sumneko_lua.setup{
