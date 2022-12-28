@@ -58,4 +58,12 @@ return require('packer').startup(function(use)
 
   -- Status line
   use 'nvim-lualine/lualine.nvim'
+
+  use {
+      'numToStr/Comment.nvim',
+      config = function()
+          require('Comment').setup()
+      end
+  }
+
   end)
