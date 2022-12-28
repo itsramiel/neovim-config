@@ -21,7 +21,7 @@ return require('packer').startup(function(use)
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
-  } 
+  }
 
   -- Theme coloring
   use({
@@ -43,13 +43,19 @@ return require('packer').startup(function(use)
 
   -- Autocompletion magic
   use {
-	  'hrsh7th/nvim-cmp',
-	  requires = {
-		  {'neovim/nvim-lspconfig'},
-		  {'hrsh7th/cmp-nvim-lsp'},
-		  {'hrsh7th/cmp-buffer'},
-		  {'hrsh7th/cmp-path'},
-		  {'L3MON4D3/LuaSnip'},
-	  }
+      'hrsh7th/nvim-cmp',
+      requires = {
+          {'neovim/nvim-lspconfig'},
+          {'hrsh7th/cmp-nvim-lsp'},
+          {'hrsh7th/cmp-buffer'},
+          {'hrsh7th/cmp-path'},
+          {'L3MON4D3/LuaSnip'},
+      }
+  }
+  use {
+      'lewis6991/gitsigns.nvim',
+      config = function()
+          require('gitsigns').setup()
+      end
   }
   end)
