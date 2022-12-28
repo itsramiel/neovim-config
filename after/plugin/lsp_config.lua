@@ -3,7 +3,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local on_attach = function()
 	-- simulate mouse hover to get info
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer = 0})
+	vim.keymap.set("n", "I", vim.lsp.buf.hover, {buffer = 0})
 	-- go to definition
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer = 0})
 	-- go to next/previous error/warning aka diagnostic
