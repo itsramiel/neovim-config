@@ -52,10 +52,5 @@ return require('packer').startup(function(use)
           {'L3MON4D3/LuaSnip'},
       }
   }
-  use {
-      'lewis6991/gitsigns.nvim',
-      config = function()
-          require('gitsigns').setup()
-      end
-  }
+  use 'lewis6991/gitsigns.nvim'
   end)

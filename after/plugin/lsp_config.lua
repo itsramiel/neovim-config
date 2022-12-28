@@ -7,8 +7,8 @@ local on_attach = function()
 	-- go to definition
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer = 0})
 	-- go to next/previous error/warning aka diagnostic
-	vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_next, {buffer = 0})
-	vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_prev, {buffer = 0})
+	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, {buffer = 0})
+	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, {buffer = 0})
 	-- rename
 	-- If renaming happens in other buffers too, you need to manually save
 	-- other buffers by doing `:wa`
