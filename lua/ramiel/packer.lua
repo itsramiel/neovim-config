@@ -66,4 +66,6 @@ return require('packer').startup(function(use)
       end
   }
 
+  -- Automatically add closing pair for '[, {, etc'
+  use 'windwp/nvim-autopairs'
   end)
