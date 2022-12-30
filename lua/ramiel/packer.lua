@@ -68,4 +68,8 @@ return require('packer').startup(function(use)
 
   -- Automatically add closing pair for '[, {, etc'
   use 'windwp/nvim-autopairs'
+
+
+  -- Automatically add closing tag for jsx, html, etc
+  use 'windwp/nvim-ts-autotag'
   end)
