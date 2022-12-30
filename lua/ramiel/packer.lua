@@ -72,4 +72,13 @@ return require('packer').startup(function(use)
 
   -- Automatically add closing tag for jsx, html, etc
   use 'windwp/nvim-ts-autotag'
-  end)
+
+  -- file and folder explorer
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
+end)
