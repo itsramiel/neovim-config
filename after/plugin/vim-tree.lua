@@ -6,6 +6,11 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 -- empty setup using defaults
-require("nvim-tree").setup()
+require("nvim-tree").setup({
+  -- when a buffer/file is opened, exapdn the tree to reveal it
+  update_focused_file = {
+    enable = true,
+  }
+})
 
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
