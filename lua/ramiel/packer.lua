@@ -87,4 +87,12 @@ return require('packer').startup(function(use)
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
+
+  -- snippets
+  use {
+    "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*",
+    requires = {
+      {'saadparwaiz1/cmp_luasnip'}
+    }
+  }
 end)
