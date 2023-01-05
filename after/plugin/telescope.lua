@@ -7,4 +7,4 @@ vim.keymap.set('n', '<leader>pr', builtin.lsp_references, {})
 vim.keymap.set('n', '<leader>pt', builtin.lsp_type_definitions, {})
 
 vim.keymap.set('n', '<leader>gs', builtin.git_status)
-vim.keymap.set('n', '<leader>gc', builtin.git_status)
+vim.keymap.set('n', '<leader>gc', builtin.git_commits)
