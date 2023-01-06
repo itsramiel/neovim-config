@@ -30,11 +30,11 @@ return {
 
   s({trig = "eaf", dscr = "arrow function with the name being the file name"},
   fmt([[
-  export const {} = () => {{
+  export const {} = ({}) => {{
     {}
   }}
   ]],
-  { d(1, get_filename), i(0)}
+  { d(1, get_filename), i(2), i(0)}
   )
   ),
   -- React related snippets
@@ -65,3 +65,5 @@ return {
   )
   )
 }
+
+
