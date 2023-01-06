@@ -1,3 +1,11 @@
+local ls = require("luasnip")
+
+ls.config.set_config {
+  update_events = 'TextChanged,TextChangedI',
+  store_selection_keys = '<Tab>',
+}
+
+vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/after/plugin/luasnip.lua<CR>")
 -- Yes, we're just executing a bunch of Vimscript using vim.cmd
 vim.cmd[[
 " Use Tab to expand and jump through snippets
