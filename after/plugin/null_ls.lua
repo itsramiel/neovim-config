@@ -1,6 +1,7 @@
 local null_ls = require("null-ls")
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
+-- https://github.com/sQVe/dotfiles/blob/master/config/nvim/lua/sQVe/plugins/null-ls.lua
+-- start of making eslint turned off if no eslint config is found
 local starts_with = function(str, start)
   return string.sub(str, 1, #start) == start
 end
@@ -41,6 +42,7 @@ local eslint_runtime_condition = create_runtime_condition({
   '.eslintrc.yaml',
   '.eslintrc.yml',
 })
+-- end of making eslint turned off if no eslint config is found
 
 null_ls.setup({
   sources = {
@@ -51,22 +53,4 @@ null_ls.setup({
       timeout = 20000,
     }),
   },
-  on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format({
-            bufnr = bufnr,
-            -- makes sure to use null-ls, not lsp or smthn else, for formatting
-            filter = function(clnt)
-              return clnt.name == "null-ls"
-            end
-          })
-        end,
-      })
-    end
-  end,
 })

@@ -2,6 +2,11 @@ local lspConfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local on_attach = function()
+  -- save and format
+  vim.keymap.set("n", "<leader>s", function ()
+    vim.lsp.buf.format()
+    vim.api.nvim_command("w")
+  end, {buffer = 0})
 	-- simulate mouse hover to get info
 	vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, {buffer = 0})
 	-- go to definition
