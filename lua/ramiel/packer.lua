@@ -22,10 +22,6 @@ return require('packer').startup(function(use)
     -- or                            , branch = '0.1.x',
     requires = {
       {'nvim-lua/plenary.nvim'},
-      { "nvim-telescope/telescope-live-grep-args.nvim" },
-      config = function()
-        require("telescope").load_extension("live_grep_args")
-      end
     }
   }
 
