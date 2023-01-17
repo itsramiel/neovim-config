@@ -62,10 +62,11 @@ return require('packer').startup(function(use)
   use 'nvim-lualine/lualine.nvim'
 
   use {
-      'numToStr/Comment.nvim',
-      config = function()
-          require('Comment').setup()
-      end
+    'numToStr/Comment.nvim',
+    requires = {
+      -- jx/tsx comment support
+      'JoosepAlviste/nvim-ts-context-commentstring'
+    }
   }
 
   -- Automatically add closing pair for '[, {, etc'

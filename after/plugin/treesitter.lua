@@ -19,4 +19,9 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+  -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring#commentnvim
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  }
 }
