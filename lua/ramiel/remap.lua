@@ -11,3 +11,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- move to next and previous buffer
 vim.keymap.set("n", "<leader>x", ":bn<CR>")
 vim.keymap.set("n", "<leader>z", ":bp<CR>")
+
+-- close all buffers(including nvim-tree) except current one
+vim.keymap.set("n", "<leader>ko", ":%bd|e#|bd#<CR>")
