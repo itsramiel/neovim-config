@@ -5,8 +5,10 @@ local i = ls.insert_node
 local d = ls.dynamic_node
 local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep
+local extras = require("luasnip.extras")
+local l = extras.lambda
 
-local get_visual = function (_, parent)
+local get_visual = function(_, parent)
   if (#parent.snippet.env.SELECT_RAW > 0) then
     return sn(nil, i(1, parent.snippet.env.SELECT_RAW))
   else
@@ -20,27 +22,37 @@ end
 
 return {
   -- Typescript related snippets
-  s({ trig="log", dscr="Expands 'log' into 'console.log(placeholder)'"},
-    fmt("console.log({});", {d(1, get_visual)})
+  s({ trig = "log", dscr = "Expands 'log' into 'console.log(placeholder)'" },
+    fmt("console.log({});", { d(1, get_visual) })
   ),
 
-  s({trig="clo", dscr="Expands 'clo' to console.log('placeholder', placeholder)"},
-    fmt("console.log('{}', {});", {d(1, get_visual), rep(1)})
+  s({ trig = "clo", dscr = "Expands 'clo' to console.log('placeholder', placeholder)" },
+    fmt("console.log('{}', {});", { d(1, get_visual), rep(1) })
   ),
 
-  s({trig = "eaf", dscr = "arrow function with the name being the file name"},
-  fmt([[
+  s({ trig = "eaf", dscr = "arrow function with the name being the file name" },
+    fmt([[
   export const {} = ({}) => {{
     {}
   }}
-  ]],
-  { d(1, get_filename), i(2), i(0)}
-  )
+  ]] ,
+      { d(1, get_filename), i(2), i(0) }
+    )
   ),
   -- React related snippets
 
-  s({trig = "eafi", dscr = "arrow function with the name being the file name and arguments defined using an interface"},
-  fmt([[
+  s(
+    "useState",
+    fmt("const [{}, set{setter}] = useState({})", {
+      i(1, "value"),
+      i(2, "initialValue"),
+      setter = l(l._1:sub(1, 1):upper() .. l._1:sub(2, -1), 1)
+    })
+  ),
+
+  s({ trig = "eafi", dscr = "arrow function with the name being the file name and arguments defined using an interface" }
+    ,
+    fmt([[
   interface {}Props {{
     {}
   }}
@@ -48,21 +60,21 @@ return {
   export const {} = ({{{}}}: {}Props) => {{
     {}
   }}
-  ]],
-  { d(1, get_filename), i(2), rep(1), i(3), rep(1), i(0)}
-  )
+  ]] ,
+      { d(1, get_filename), i(2), rep(1), i(3), rep(1), i(0) }
+    )
   ),
 
-  s({trig = "eaft", dscr = "arrow function with the name being the file name and arguments defined using an interface"},
-  fmt([[
+  s({ trig = "eaft", dscr = "arrow function with the name being the file name and arguments defined using an interface" }
+    ,
+    fmt([[
   type T{}Args = {}
 
   export const {} = ({}: T{}Args) => {{
     {}
   }}
-  ]],
-  { d(1, get_filename), i(2), rep(1), i(3), rep(1), i(0)}
-  )
+  ]] ,
+      { d(1, get_filename), i(2), rep(1), i(3), rep(1), i(0) }
+    )
   )
 }
-
