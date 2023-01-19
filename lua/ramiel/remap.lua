@@ -14,3 +14,14 @@ vim.keymap.set("n", "<leader>z", ":bp<CR>")
 
 -- close all buffers(including nvim-tree) except current one
 vim.keymap.set("n", "<leader>ko", ":%bd|e#|bd#<CR>")
+
+-- keep cursor in the middle when going to next/previous search
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
+
+-- keep cursor in the middle when going to next/previous occurence
+vim.keymap.set("n", "*", "*zz")
+vim.keymap.set("n", "#", "#zz")
+
+-- copying to system clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
