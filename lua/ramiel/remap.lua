@@ -13,7 +13,9 @@ vim.keymap.set("n", "<leader>x", ":bn<CR>")
 vim.keymap.set("n", "<leader>z", ":bp<CR>")
 
 -- close all buffers(including nvim-tree) except current one
-vim.keymap.set("n", "<leader>ko", ":%bd|e#|bd#<CR>")
+vim.keymap.set("n", "<leader>ko", ":%bd|e#|bd#<CR>") -- kill others
+vim.keymap.set("n", "<leader>ka", ":bufdo bd<CR>") -- kill all
+vim.keymap.set("n", "<leader>ks", ":bd<CR>") -- kill self
 
 -- keep cursor in the middle when going to next/previous search
 vim.keymap.set("n", "n", "nzz")
