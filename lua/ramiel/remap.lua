@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", function() vim.cmd('Ex') end)
 
+-- Map saving file to macth lsp formatted save
+vim.keymap.set("n", "<leader>s", ":w<CR>")
 
 -- move line up and down
 vim.keymap.set("n", "J", ":m .+1<CR>==")
