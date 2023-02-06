@@ -10,6 +10,9 @@ require("nvim-tree").setup({
   -- when a buffer/file is opened, exapdn the tree to reveal it
   update_focused_file = {
     enable = true,
+  },
+  view = {
+    relativenumber = true,
   }
 })
 
