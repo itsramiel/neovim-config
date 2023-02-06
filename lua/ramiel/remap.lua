@@ -22,7 +22,8 @@ vim.keymap.set("n", "<leader>z", ":bp<CR>")
 vim.keymap.set("n", "<leader>ko", ":%bd|e#|bd#<CR>") -- kill others
 vim.keymap.set("n", "<leader>ka", ":bufdo bd<CR>") -- kill all
 vim.keymap.set("n", "<leader>ks", ":bd<CR>") -- kill self
-vim.keymap.set("n", "<leader>kc", ":bp|bd #<CR>") -- kill self
+vim.keymap.set("n", "<leader>kh", ":bp|bd #<CR>") -- kill self
+vim.keymap.set("n", "<leader>kl", ":bn|bd #<CR>") -- kill self
 
 -- keep cursor in the middle when going to next/previous search
 vim.keymap.set("n", "n", "nzz")
