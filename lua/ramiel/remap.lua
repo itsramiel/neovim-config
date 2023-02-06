@@ -9,8 +9,8 @@ vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<leader>s", ":w<CR>")
 
 -- move line up and down
-vim.keymap.set("n", "J", ":m .+1<CR>==")
-vim.keymap.set("n", "K", ":m .-2<CR>==")
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
@@ -35,3 +35,6 @@ vim.keymap.set("n", "#", "#zz")
 
 -- copying to system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+
+-- keep cursor in place when joining lines
+vim.keymap.set("n", "J", "mzJ`z")
