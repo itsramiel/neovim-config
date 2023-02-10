@@ -11,8 +11,8 @@ vim.keymap.set("n", "<leader>s", ":w<CR>")
 -- move line up and down
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
 -- move to next and previous buffer
 vim.keymap.set("n", "<leader>x", ":bn<CR>")
