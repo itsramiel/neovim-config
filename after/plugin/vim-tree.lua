@@ -13,6 +13,12 @@ require("nvim-tree").setup({
   },
   view = {
     relativenumber = true,
+    width = 60,
+    mappings = {
+      list = {
+        { key = "<C-e>", action = "" },
+      }
+    }
   }
 })
 
