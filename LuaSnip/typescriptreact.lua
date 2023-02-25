@@ -76,5 +76,22 @@ return {
   ]] ,
       { d(1, get_filename), i(2), rep(1), i(3), rep(1), i(0) }
     )
+  ),
+
+  s({ trig = "rnstyle", dscr = "react native stylesheet" }
+    ,
+    fmt([[
+  const styles = StyleSheet{}.create({{
+    {}: {{
+      {}
+    }}
+  }})
+  ]] ,
+      {
+        i(1),
+        i(2, "container"),
+        i(0)
+      }
+    )
   )
 }
