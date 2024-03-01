@@ -1,6 +1,9 @@
 local keymap = vim.keymap
 
-local opts = { noremap = true, silent = true }
+local opts = { noremap = true}
+
+opts.desc = "Match lsp save file"
+keymap.set('n', '<leader>w', '<cmd>w<CR>', opts)
 
 opts.desc = "Move line down"
 keymap.set('n', '<A-j>', ':m .+1<CR>==', opts)
