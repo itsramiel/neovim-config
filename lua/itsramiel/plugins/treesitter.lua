@@ -39,9 +39,6 @@ return {
           "gitignore",
         },
       })
-
-      -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
-      require('ts_context_commentstring').setup {}
     end,
   },
 }
