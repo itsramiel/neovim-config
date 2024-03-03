@@ -37,15 +37,6 @@ opts.desc = "Copy to system clipboard"
 keymap.set("n", "<leader>y", '"+y', opts)
 keymap.set("v", "<leader>y", '"+y', opts)
 
-opts.desc = "Move to left window"
-keymap.set("n", "<C-h>", "<C-w>h")
-opts.desc = "Move to bottom window"
-keymap.set("n", "<C-j>", "<C-w>j")
-opts.desc = "Move to top window"
-keymap.set("n", "<C-k>", "<C-w>k")
-opts.desc = "Move to right window"
-keymap.set("n", "<C-l>", "<C-w>l")
-
 opts.desc = "Clear search highlight"
 keymap.set("n", "<leader>nh", ":nohl<CR>")
 
