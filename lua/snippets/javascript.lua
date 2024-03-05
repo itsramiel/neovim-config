@@ -1,11 +1,11 @@
 local ls = require("luasnip")
 local s = ls.snippet
--- local sn = ls.snippet_node
+local sn = ls.snippet_node
 -- local isn = ls.indent_snippet_node
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
--- local d = ls.dynamic_node
+local d = ls.dynamic_node
 local c = ls.choice_node
 -- local r = ls.restore_node
 local fmt = require("luasnip.extras.fmt").fmt
@@ -15,10 +15,6 @@ local rep = require("luasnip.extras").rep
 
 local function firstToUpper(str)
 	return (str:gsub("^%l", string.upper))
-end
-
-local getBaseFilename = function(_, snip)
-	return snip.env.TM_FILENAME_BASE
 end
 
 return {
@@ -57,7 +53,10 @@ return {
 		"useRef",
 		fmt("const {} = useRef{}({});", {
 			i(1),
-			i(2),
+			c(2, {
+				fmt("<{}>", i(1)),
+				t(""),
+			}),
 			i(3),
 		})
 	),
@@ -85,9 +84,13 @@ return {
 					t("export "),
 					t(""),
 				}),
-				f(getBaseFilename),
-				i(2),
+				d(2, function(_, parent)
+					return sn(nil, {
+						i(1, parent.env.TM_FILENAME_BASE),
+					})
+				end),
 				i(3),
+				i(4),
 				i(0),
 			}
 		)
