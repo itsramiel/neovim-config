@@ -21,7 +21,7 @@ return {
       mapping = cmp.mapping.preset.insert({
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-c>"] = cmp.mapping.complete(), -- show completion suggestions
+        ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
         ["<C-e>"] = cmp.mapping.abort(), -- close completion window
         ["<C-y>"] = cmp.mapping.confirm({ select = true }),
       }),
