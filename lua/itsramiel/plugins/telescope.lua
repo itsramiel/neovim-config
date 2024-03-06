@@ -41,5 +41,6 @@ return {
 		keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Open buffers" })
 		keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume last search" })
 		keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Git status in telescope" })
+		keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Git branch in telescope" })
 	end,
 }
