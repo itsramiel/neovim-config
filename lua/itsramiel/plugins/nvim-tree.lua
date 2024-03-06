@@ -17,15 +17,26 @@ return {
 		vim.cmd([[ highlight NvimTreeFolderArrowClosed guifg=#3FC5FF ]])
 		vim.cmd([[ highlight NvimTreeFolderArrowOpen guifg=#3FC5FF ]])
 
+		local function my_on_attach(bufnr)
+			local api = require("nvim-tree.api")
+
+      -- add default mappings
+			api.config.mappings.default_on_attach(bufnr)
+
+      -- remove default mapping which is usally for scrolling down
+			vim.keymap.del("n", "<C-E>", { buffer = bufnr })
+		end
+
 		-- configure nvim-tree
 		require("nvim-tree").setup({
+			on_attach = my_on_attach,
 			view = {
 				width = 50,
 				relativenumber = true,
 			},
-      update_focused_file = {
-        enable = true,
-      },
+			update_focused_file = {
+				enable = true,
+			},
 			-- change folder arrow icons
 			renderer = {
 				indent_markers = {
