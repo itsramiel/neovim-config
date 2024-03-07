@@ -86,3 +86,5 @@ opts.desc = "Kill current buffer and go to previous"
 keymap.set("n", "<leader>kh", ":bp|bd#<CR>", opts)
 opts.desc = "Kill all buffers"
 keymap.set("n", "<leader>ka", ":bufdo bd<CR>", opts)
+
+keymap.set("x", "<leader>p", "\"_dP")
