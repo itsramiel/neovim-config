@@ -4,8 +4,44 @@ return {
 	lazy = false,
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
+		"nvim-telescope/telescope.nvim",
 	},
 	config = function()
+		local ntree = require("nvim-tree")
+		local api = require("nvim-tree.api")
+		local telescope = require("telescope.builtin")
+
+		--- Absolute paths of the node.
+		--- @return string|nil file node
+		--- @return string|nil dir parent node of file otherwise node
+		local function node_path_dir()
+			local node = api.tree.get_node_under_cursor()
+			if not node then
+				return
+			end
+
+			if node.parent and node.type == "file" then
+				return node.absolute_path, node.parent.absolute_path
+			else
+				return node.absolute_path, node.absolute_path
+			end
+		end
+
+		local function find_files()
+			local _, dir = node_path_dir()
+			if dir then
+				telescope.find_files({ search_dirs = { dir } })
+			end
+		end
+
+		local function live_grep()
+			local _, dir = node_path_dir()
+			if dir then
+				telescope.live_grep({ search_dirs = { dir } })
+			end
+		end
+
+
 		-- disable netrw at the very start of your init.lua
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
@@ -18,17 +54,60 @@ return {
 		vim.cmd([[ highlight NvimTreeFolderArrowOpen guifg=#3FC5FF ]])
 
 		local function my_on_attach(bufnr)
-			local api = require("nvim-tree.api")
+			local function opts(desc)
+				return {
+					desc = "nvim-tree: " .. desc,
+					buffer = bufnr,
+					noremap = true,
+					silent = true,
+					nowait = true,
+				}
+			end
 
-      -- add default mappings
-			api.config.mappings.default_on_attach(bufnr)
+			vim.keymap.set("n", "<C-]>", api.tree.change_root_to_node, opts("CD"))
+			vim.keymap.set("n", "-", api.tree.change_root_to_parent, opts("Up"))
+			vim.keymap.set("n", "<C-k>", api.node.show_info_popup, opts("Info"))
+			vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
+			vim.keymap.set("n", "<Tab>", api.node.open.preview, opts("Open Preview"))
+			vim.keymap.set("n", "a", api.fs.create, opts("Create File Or Directory"))
+			vim.keymap.set("n", "P", api.node.navigate.parent, opts("Parent Directory"))
+			vim.keymap.set("n", "R", api.tree.reload, opts("Refresh"))
+			vim.keymap.set("n", "s", api.node.run.system, opts("Run System"))
+			vim.keymap.set("n", "x", api.fs.cut, opts("Cut"))
+			vim.keymap.set("n", "W", api.tree.collapse_all, opts("Collapse"))
 
-      -- remove default mapping which is usally for scrolling down
-			vim.keymap.del("n", "<C-E>", { buffer = bufnr })
+			vim.keymap.set("n", "q", api.tree.close, opts("Close"))
+			vim.keymap.set("n", "g?", api.tree.toggle_help, opts("Help"))
+
+			vim.keymap.set("n", "H", api.tree.toggle_hidden_filter, opts("Toggle Filter: Dotfiles"))
+			vim.keymap.set("n", "I", api.tree.toggle_gitignore_filter, opts("Toggle Filter: Git Ignore"))
+
+			vim.keymap.set("n", "[c", api.node.navigate.git.prev, opts("Prev Git"))
+			vim.keymap.set("n", "]c", api.node.navigate.git.next, opts("Next Git"))
+
+			vim.keymap.set("n", "bt", api.marks.toggle, opts("Toggle Bookmark"))
+			vim.keymap.set("n", "bd", api.marks.bulk.delete, opts("Delete Bookmarked"))
+			vim.keymap.set("n", "bm", api.marks.bulk.move, opts("Move Bookmarked"))
+
+			vim.keymap.set("n", "rn", api.fs.rename, opts("Rename"))
+			vim.keymap.set("n", "rp", api.fs.rename_full, opts("Rename: Full Path"))
+			vim.keymap.set("n", "rb", api.fs.rename_basename, opts("Rename: Basename"))
+
+			vim.keymap.set("n", "yn", api.fs.copy.filename, opts("Copy Name"))
+			vim.keymap.set("n", "yrp", api.fs.copy.relative_path, opts("Copy Relative Path"))
+			vim.keymap.set("n", "yap", api.fs.copy.absolute_path, opts("Copy Absolute Path"))
+			vim.keymap.set("n", "yy", api.fs.copy.node, opts("Copy"))
+
+			vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
+
+			vim.keymap.set("n", "p", api.fs.paste, opts("Paste"))
+
+			vim.keymap.set("n", "tf", find_files, opts("Find Files"))
+			vim.keymap.set("n", "tg", live_grep, opts("Live Grep"))
 		end
 
 		-- configure nvim-tree
-		require("nvim-tree").setup({
+		ntree.setup({
 			on_attach = my_on_attach,
 			view = {
 				width = 50,
