@@ -74,6 +74,12 @@ return {
       on_attach = on_attach,
     })
 
+    -- configure jsonls server with plugin
+    lspconfig["jsonls"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
     -- configure eslint server with plugin
     lspconfig["eslint"].setup({
       capabilities = capabilities,
