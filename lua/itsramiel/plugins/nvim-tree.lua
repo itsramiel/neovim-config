@@ -94,6 +94,7 @@ return {
 			vim.keymap.set("n", "rb", api.fs.rename_basename, opts("Rename: Basename"))
 
 			vim.keymap.set("n", "yn", api.fs.copy.filename, opts("Copy Name"))
+			vim.keymap.set("n", "yb", api.fs.copy.basename, opts("Copy Basename"))
 			vim.keymap.set("n", "yrp", api.fs.copy.relative_path, opts("Copy Relative Path"))
 			vim.keymap.set("n", "yap", api.fs.copy.absolute_path, opts("Copy Absolute Path"))
 			vim.keymap.set("n", "yy", api.fs.copy.node, opts("Copy"))
