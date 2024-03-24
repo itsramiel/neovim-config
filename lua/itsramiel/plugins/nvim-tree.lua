@@ -41,7 +41,6 @@ return {
 			end
 		end
 
-
 		-- disable netrw at the very start of your init.lua
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
@@ -129,6 +128,12 @@ return {
 							arrow_open = "", -- arrow when folder is open
 						},
 					},
+				},
+			},
+      -- https://github.com/nvim-tree/nvim-tree.lua/issues/2723#issuecomment-2016667970
+			filesystem_watchers = {
+				ignore_dirs = {
+					"node_modules",
 				},
 			},
 		})
