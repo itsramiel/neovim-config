@@ -42,5 +42,8 @@ return {
 		keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume last search" })
 		keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Git status in telescope" })
 		keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Git branch in telescope" })
+		keymap.set("n", "<leader>gi", builtin.lsp_implementations, { desc = "Go or show all implementations of word under cursor" })
+		keymap.set("n", "<leader>gd", builtin.lsp_definitions, { desc = "Go or show all definitions of word under cursor" })
+		keymap.set("n", "<leader>gt", builtin.lsp_type_definitions, { desc = "Go or show all type definitions of word under cursor" })
 	end,
 }
