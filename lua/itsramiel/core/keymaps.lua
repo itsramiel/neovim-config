@@ -47,8 +47,8 @@ opts.desc = "split window horizontally"
 keymap.set("n", "<leader>sh", "<C-w>s")
 opts.desc = "make split windows equal width & height"
 keymap.set("n", "<leader>se", "<C-w>=")
-opts.desc = "close current split window"
-keymap.set("n", "<leader>sx", ":close<CR>")
+opts.desc = "Swap splits"
+keymap.set("n", "<leader>ss", "<C-W>R")
 
 opts.desc = "open new tab"
 keymap.set("n", "<leader>to", ":tabnew<CR>")
@@ -87,4 +87,4 @@ keymap.set("n", "<leader>kh", ":bp|bd#<CR>", opts)
 opts.desc = "Kill all buffers"
 keymap.set("n", "<leader>ka", ":bufdo bd<CR>", opts)
 
-keymap.set("x", "<leader>p", "\"_dP")
+keymap.set("x", "<leader>p", '"_dP')
