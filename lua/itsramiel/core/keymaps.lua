@@ -89,4 +89,8 @@ keymap.set("n", "<leader>kh", ":bp|bd#<CR>", opts)
 opts.desc = "Kill all buffers"
 keymap.set("n", "<leader>ka", ":bufdo bd<CR>", opts)
 
-keymap.set("x", "<leader>p", '"_dP')
+-- Jump to the next/precious number
+opts.desc = "Jump to the next number"
+keymap.set("n", "<leader>nn", "/\\d\\+<CR>", opts)
+opts.desc = "Jump to the previous number"
+keymap.set("n", "<leader>pn", "?\\d\\+<CR>", opts)
