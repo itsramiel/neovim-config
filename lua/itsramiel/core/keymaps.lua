@@ -52,15 +52,6 @@ keymap.set("n", "<leader>sx", ":close<CR>")
 opts.desc = "Swap splits"
 keymap.set("n", "<leader>ss", "<C-W>R")
 
-opts.desc = "open new tab"
-keymap.set("n", "<leader>to", ":tabnew<CR>")
-opts.desc = "close current tab"
-keymap.set("n", "<leader>tx", ":tabclose<CR>")
-opts.desc = "go to next tab"
-keymap.set("n", "<leader>tn", ":tabn<CR>")
-opts.desc = "go to previous tab"
-keymap.set("n", "<leader>tp", ":tabp<CR>")
-
 opts.desc = "Jump to next non-whitespace matching indentation"
 keymap.set({ "n", "v" }, "<M-,>", function()
 	vim.cmd("call search('^'. matchstr(getline('.'), '\\(^\\s*\\)') .'\\%<' . line('.') . 'l\\S', 'be')")
