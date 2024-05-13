@@ -35,6 +35,8 @@ return {
           "lua",
           "vim",
           "gitignore",
+          "swift",
+          "cpp"
         },
       })
     end,
