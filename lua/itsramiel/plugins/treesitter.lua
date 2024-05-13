@@ -36,7 +36,8 @@ return {
           "vim",
           "gitignore",
           "swift",
-          "cpp"
+          "cpp",
+          "ruby"
         },
       })
     end,
