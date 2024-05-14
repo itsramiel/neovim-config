@@ -8,7 +8,7 @@ return {
 
     local opts = { noremap = true, silent = true }
 
-    opts.desc = "toggle split window maximization"
+    opts.desc = "toggle current symbol"
     keymap.set("n", "<leader>ta", "<cmd>lua require('alternate-toggler').toggleAlternate()<CR>", opts)
   end,
   event = { "BufReadPost" }, -- lazy load after reading a buffer
