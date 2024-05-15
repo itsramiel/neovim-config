@@ -43,6 +43,7 @@ return {
 		keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Git status in telescope" })
 		keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Git branch in telescope" })
 		keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Git commits in telescope" })
+		keymap.set("n", "<leader>km", builtin.keymaps, { desc = "Display keymaps in telescope" })
 		keymap.set("n", "gi", builtin.lsp_implementations, { desc = "Go or show all implementations of word under cursor" })
 		keymap.set("n", "gd", builtin.lsp_definitions, { desc = "Go or show all definitions of word under cursor" })
 		keymap.set("n", "gt", builtin.lsp_type_definitions, { desc = "Go or show all type definitions of word under cursor" })
