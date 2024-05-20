@@ -32,6 +32,7 @@ return {
 		require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets" })
 
 		ls.filetype_extend("javascriptreact", { "javascript" })
+		ls.filetype_extend("typescriptreact", { "javascriptreact" })
 		ls.filetype_extend("typescriptreact", { "javascript" })
 		ls.filetype_extend("typescript", { "javascript" })
 	end,

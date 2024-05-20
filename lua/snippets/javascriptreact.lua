@@ -5,14 +5,27 @@ local fmt = require("luasnip.extras.fmt").fmt
 
 return {
 	s(
-		"rnstyle",
+		"rnstyles",
 		fmt(
 			[[
   const styles = Stylesheet{}.create({{
-    {}
+    {}: {{
+      {}
+    }}
   }})
   ]],
-			{ i(1), i(0) }
+			{ i(1), i(2, "container"), i(0) }
+		)
+	),
+	s(
+		"rnstyle",
+		fmt(
+			[[
+  {}: {{
+    {}
+  }}
+  ]],
+			{ i(1, "container"), i(0) }
 		)
 	),
 }
