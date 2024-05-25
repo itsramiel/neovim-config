@@ -46,7 +46,7 @@ keymap.set("n", "<leader>sv", "<C-w>v")
 opts.desc = "split window horizontally"
 keymap.set("n", "<leader>sh", "<C-w>s")
 opts.desc = "make split windows equal width & height"
-keymap.set("n", "<leader>se", "<C-w>=")
+keymap.set("n", "<leader>s=", "<C-w>=")
 opts.desc = "close current split window"
 keymap.set("n", "<leader>sx", ":close<CR>")
 opts.desc = "Swap splits"
