@@ -14,7 +14,7 @@ return {
 		local keymap = vim.keymap -- for conciseness
 
 		local opts = { noremap = true, silent = true }
-		local on_attach = function(_, bufnr)
+		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
 
 			-- set keybinds
@@ -50,6 +50,13 @@ return {
 
 			opts.desc = "Restart LSP"
 			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+			if client.server_capabilities.inlayHintProvider then
+				opts.desc = "Toggle inlay hints for the attached lsp server"
+				keymap.set("n", "<leader>th", function()
+					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr }), { bufnr })
+				end, opts) -- mapping to restart lsp if necessary
+			end
 		end
 
 		-- used to enable autocompletion (assign to every lsp server config)
@@ -70,8 +77,29 @@ return {
 
 		-- configure typescript server with plugin
 		lspconfig["tsserver"].setup({
+			init_options = {
+				preferences = {
+					includeInlayParameterNameHints = "all",
+					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayVariableTypeHints = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayEnumMemberValueHints = true,
+				},
+			},
 			capabilities = capabilities,
-			on_attach = on_attach,
+			on_attach = function(client, bufnr)
+				opts.desc = "Organize imports"
+				keymap.set("n", "<leader>oi", function()
+					vim.lsp.buf.execute_command({
+						command = "_typescript.organizeImports",
+						arguments = { vim.api.nvim_buf_get_name(bufnr) },
+					})
+				end, opts) -- show definition, references
+
+				on_attach(client, bufnr)
+			end,
 		})
 
 		-- configure jsonls server with plugin
