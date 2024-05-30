@@ -45,6 +45,7 @@ return {
 					"swift",
 					"cpp",
 					"ruby",
+					"kotlin",
 				},
 			})
 		end,

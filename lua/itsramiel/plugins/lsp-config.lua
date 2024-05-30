@@ -119,6 +119,12 @@ return {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
+		--
+		-- configure kotlin server
+		lspconfig["kotlin_language_server"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
 
 		-- configure cpp server
 		lspconfig["clangd"].setup({
