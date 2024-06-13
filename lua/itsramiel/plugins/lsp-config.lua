@@ -100,6 +100,23 @@ return {
 
 				on_attach(client, bufnr)
 			end,
+			handlers = {
+				["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+					local diagnostic_codes_to_filter = { 80001, 80005 }
+
+					if result.diagnostics then
+						result.diagnostics = vim.tbl_filter(function(diagnostic)
+							for _, code in ipairs(diagnostic_codes_to_filter) do
+								if diagnostic.code == code then
+									return false
+								end
+							end
+							return true
+						end, result.diagnostics)
+					end
+					vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+				end,
+			},
 		})
 
 		-- configure jsonls server with plugin
