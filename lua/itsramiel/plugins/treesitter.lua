@@ -36,6 +36,7 @@ return {
 					"cpp",
 					"ruby",
 					"kotlin",
+					"cmake",
 				},
 			})
 		end,
