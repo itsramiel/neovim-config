@@ -85,3 +85,6 @@ opts.desc = "Jump to the next number"
 keymap.set("n", "<leader>nn", "/\\d\\+<CR>", opts)
 opts.desc = "Jump to the previous number"
 keymap.set("n", "<leader>pn", "?\\d\\+<CR>", opts)
+
+opts.desc = "Keep cursor position after yanking"
+keymap.set("v", "Y", "ygv<Esc>", opts)
