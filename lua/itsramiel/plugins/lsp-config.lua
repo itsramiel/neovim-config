@@ -90,15 +90,24 @@ return {
 			},
 			capabilities = capabilities,
 			on_attach = function(client, bufnr)
-				opts.desc = "Organize imports"
-				keymap.set("n", "<leader>oi", function()
-					vim.lsp.buf.execute_command({
-						command = "_typescript.organizeImports",
-						arguments = { vim.api.nvim_buf_get_name(bufnr) },
-					})
-				end, opts) -- show definition, references
+				local function is_flow_project(fname)
+					return lspconfig.util.root_pattern(".flowconfig")(fname) ~= nil
+				end
 
-				on_attach(client, bufnr)
+				if is_flow_project(vim.api.nvim_buf_get_name(bufnr)) == true then
+					-- disable tsserver if flow project
+					client.stop()
+				else
+					opts.desc = "Organize imports"
+					keymap.set("n", "<leader>oi", function()
+						vim.lsp.buf.execute_command({
+							command = "_typescript.organizeImports",
+							arguments = { vim.api.nvim_buf_get_name(bufnr) },
+						})
+					end, opts) -- show definition, references
+
+					on_attach(client, bufnr)
+				end
 			end,
 			handlers = {
 				["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
@@ -164,6 +173,12 @@ return {
 
 		-- configure cmake language server
 		lspconfig["cmake"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- configure flow language server
+		lspconfig["flow"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
