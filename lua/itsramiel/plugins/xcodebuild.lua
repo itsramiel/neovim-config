@@ -25,10 +25,10 @@ return {
 		opts.desc = "Build & Run Project"
 		vim.keymap.set("n", "<leader>xr", "<cmd>XcodebuildBuildRun<cr>", opts)
 
-		opts.desc = "Toggle Xcodebuild Logs"
-		vim.keymap.set("n", "<leader>xl", "<cmd>XcodebuildToggleLogs<cr>", opts)
+		opts.desc = "Stop Build"
+		vim.keymap.set("n", "<leader>xc", "<cmd>XcodebuildCancel<cr>", opts)
 
-		opts.desc = "Select Device"
-		vim.keymap.set("n", "<leader>xd", "<cmd>XcodebuildSelectDevice<cr>", opts)
+		opts.desc = "Run Without Building"
+		vim.keymap.set("n", "<leader>xe", "<cmd>XcodebuildRun<cr>", opts)
 	end,
 }
