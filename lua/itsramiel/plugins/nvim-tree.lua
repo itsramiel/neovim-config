@@ -108,6 +108,9 @@ return {
 
 		-- configure nvim-tree
 		ntree.setup({
+      filters = {
+        custom = { ".git", "node_modules", ".bundle", "Pods" },
+      },
 			on_attach = my_on_attach,
 			view = {
 				width = 50,
