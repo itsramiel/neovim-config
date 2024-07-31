@@ -108,9 +108,9 @@ return {
 
 		-- configure nvim-tree
 		ntree.setup({
-      filters = {
-        custom = { ".git", "node_modules", ".bundle", "Pods" },
-      },
+			filters = {
+				custom = { ".git", ".bundle", "Pods" },
+			},
 			on_attach = my_on_attach,
 			view = {
 				width = 50,
@@ -133,7 +133,7 @@ return {
 					},
 				},
 			},
-      -- https://github.com/nvim-tree/nvim-tree.lua/issues/2723#issuecomment-2016667970
+			-- https://github.com/nvim-tree/nvim-tree.lua/issues/2723#issuecomment-2016667970
 			filesystem_watchers = {
 				ignore_dirs = {
 					"node_modules",
