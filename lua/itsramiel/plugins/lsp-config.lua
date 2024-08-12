@@ -48,8 +48,12 @@ return {
 			opts.desc = "Show documentation for what is under cursor"
 			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
+			opts.desc = "Start LSP"
+			keymap.set("n", "<leader>ls", ":LspStart<CR>", opts) -- mapping to start lsp
+			opts.desc = "Stop LSP"
+			keymap.set("n", "<leader>lx", ":LspStop<CR>", opts) -- mapping to stop lsp
 			opts.desc = "Restart LSP"
-			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+			keymap.set("n", "<leader>lr", ":LspRestart<CR>", opts) -- mapping to restart lsp
 
 			if client.server_capabilities.inlayHintProvider then
 				opts.desc = "Toggle inlay hints for the attached lsp server"
