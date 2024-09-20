@@ -64,9 +64,9 @@ end, opts)
 
 -- Moving between buffer
 opts.desc = "Go to next buffer"
-keymap.set("n", "<C-,>", ":bnext<CR>", opts)
+keymap.set("n", "<C-.>", ":bnext<CR>", opts)
 opts.desc = "Close all but current buffer"
-keymap.set("n", "<C-.>", ":bprevious<CR>", opts)
+keymap.set("n", "<C-,>", ":bprevious<CR>", opts)
 
 -- Closing buffers
 opts.desc = "Close current buffer"

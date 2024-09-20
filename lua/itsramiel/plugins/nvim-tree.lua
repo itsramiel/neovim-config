@@ -80,6 +80,7 @@ return {
 
 			vim.keymap.set("n", "H", api.tree.toggle_hidden_filter, opts("Toggle Filter: Dotfiles"))
 			vim.keymap.set("n", "I", api.tree.toggle_gitignore_filter, opts("Toggle Filter: Git Ignore"))
+			vim.keymap.set("n", "U", api.tree.toggle_custom_filter, opts("Toggle Hidden"))
 
 			vim.keymap.set("n", "[c", api.node.navigate.git.prev, opts("Prev Git"))
 			vim.keymap.set("n", "]c", api.node.navigate.git.next, opts("Next Git"))
@@ -109,7 +110,7 @@ return {
 		-- configure nvim-tree
 		ntree.setup({
 			filters = {
-				custom = { ".git", ".bundle", "Pods" },
+				custom = { ".git" , "node_modules"},
 			},
 			on_attach = my_on_attach,
 			view = {

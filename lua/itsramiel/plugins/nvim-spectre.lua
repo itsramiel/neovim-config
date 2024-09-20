@@ -5,6 +5,20 @@ return {
 		"nvim-lua/plenary.nvim",
 	},
 	config = function()
+		-- https://github.com/nvim-pack/nvim-spectre/issues/118#issuecomment-1531683211
+		require("spectre").setup({
+			replace_engine = {
+				["sed"] = {
+					cmd = "sed",
+					args = {
+						"-i",
+						"",
+						"-E",
+					},
+				},
+			},
+		})
+
 		local opts = { noremap = true, silent = true, desc = "Display text cases in telescope" }
 
 		opts.desc = "Toggle Spectre"

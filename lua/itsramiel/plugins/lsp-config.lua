@@ -142,7 +142,6 @@ return {
 		lspconfig["eslint"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-			root_dir = lspconfig.util.find_git_ancestor,
 		})
 
 		-- configure css server
