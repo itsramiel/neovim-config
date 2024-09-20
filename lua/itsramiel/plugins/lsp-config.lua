@@ -80,7 +80,7 @@ return {
 		})
 
 		-- configure typescript server with plugin
-		lspconfig["tsserver"].setup({
+		lspconfig["ts_ls"].setup({
 			init_options = {
 				preferences = {
 					includeInlayParameterNameHints = "all",
@@ -99,7 +99,7 @@ return {
 				end
 
 				if is_flow_project(vim.api.nvim_buf_get_name(bufnr)) == true then
-					-- disable tsserver if flow project
+					-- disable ts_ls if flow project
 					client.stop()
 				else
 					opts.desc = "Organize imports"
