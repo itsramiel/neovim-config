@@ -14,30 +14,44 @@ return {
           vim.keymap.set(mode, l, r, opts)
         end
 
+        local opts = { noremap = true, silent = true }
+
         -- Navigation
+        opts.desc = "Gitsigns: next hunk"
         map('n', ']c', function()
           if vim.wo.diff then return ']c' end
           vim.schedule(function() gs.next_hunk() end)
           return '<Ignore>'
-        end, { expr = true })
+        end, opts)
 
+        opts.desc = "Gitsigns: prev hunk"
         map('n', '[c', function()
           if vim.wo.diff then return '[c' end
           vim.schedule(function() gs.prev_hunk() end)
           return '<Ignore>'
-        end, { expr = true })
+        end, opts)
 
         -- Actions
-        map('n', '<leader>hs', gs.stage_hunk)
-        map('n', '<leader>hS', gs.stage_buffer)
-        map('n', '<leader>hr', gs.reset_hunk)
-        map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
-        map('n', '<leader>hR', gs.reset_buffer)
-        map('n', '<leader>hp', gs.preview_hunk)
-        map('n', '<leader>hb', function() gs.blame_line { full = true } end)
-        map('n', '<leader>tb', gs.toggle_current_line_blame)
-        map('n', '<leader>hd', gs.diffthis)
-        map('n', '<leader>td', gs.toggle_deleted)
+        opts.desc = "Gitsigns: stage hunk"
+        map('n', '<leader>hs', gs.stage_hunk, opts)
+        opts.desc = "Gitsigns: stage buffer"
+        map('n', '<leader>hS', gs.stage_buffer, opts)
+        opts.desc = "Gitsigns: reset hunk"
+        map('n', '<leader>hr', gs.reset_hunk, opts)
+        opts.desc = "Gitsigns: reset hunk"
+        map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end, opts)
+        opts.desc = "Gitsigns: reset buffer"
+        map('n', '<leader>hR', gs.reset_buffer, opts)
+        opts.desc = "Gitsigns: preview hunk"
+        map('n', '<leader>hp', gs.preview_hunk, opts)
+        opts.desc = "Gitsigns: preview blame"
+        map('n', '<leader>hb', gs.blame_line, opts)
+        opts.desc = "Gitsigns: toggle blame"
+        map('n', '<leader>tb', gs.toggle_current_line_blame, opts)
+        opts.desc = "Gitsigns: toggle diff"
+        map('n', '<leader>hd', gs.diffthis, opts)
+        opts.desc = "Gitsigns: toggle deleted"
+        map('n', '<leader>td', gs.toggle_deleted, opts)
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')

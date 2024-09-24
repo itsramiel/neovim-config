@@ -7,6 +7,7 @@ return {
 	config = function()
 		-- https://github.com/nvim-pack/nvim-spectre/issues/118#issuecomment-1531683211
 		require("spectre").setup({
+      live_update = true,
 			replace_engine = {
 				["sed"] = {
 					cmd = "sed",
