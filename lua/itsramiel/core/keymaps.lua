@@ -62,24 +62,6 @@ keymap.set({ "n", "v" }, "<M-.>", function()
 	vim.cmd("call search('^'. matchstr(getline('.'), '\\(^\\s*\\)') .'\\%>' . line('.') . 'l\\S', 'e')")
 end, opts)
 
--- Moving between buffer
-opts.desc = "Go to next buffer"
-keymap.set("n", "<C-.>", ":bnext<CR>", opts)
-opts.desc = "Close all but current buffer"
-keymap.set("n", "<C-,>", ":bprevious<CR>", opts)
-
--- Closing buffers
-opts.desc = "Close current buffer"
-keymap.set("n", "<leader>ks", ":bd<CR>", opts)
-opts.desc = "Kill all other buffers"
-keymap.set("n", "<leader>ko", ":%bd|e#<CR>", opts)
-opts.desc = "Kill current buffer and go to next"
-keymap.set("n", "<leader>kl", ":bn|bd#<CR>", opts)
-opts.desc = "Kill current buffer and go to previous"
-keymap.set("n", "<leader>kh", ":bp|bd#<CR>", opts)
-opts.desc = "Kill all buffers"
-keymap.set("n", "<leader>ka", ":bufdo bd<CR>", opts)
-
 -- Jump to the next/precious number
 opts.desc = "Jump to the next number"
 keymap.set("n", "<leader>nn", "/\\d\\+<CR>", opts)
