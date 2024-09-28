@@ -110,7 +110,7 @@ return {
 		-- configure nvim-tree
 		ntree.setup({
 			filters = {
-				custom = { "^.git$" , "node_modules"},
+				custom = { "^.git$", "node_modules" },
 			},
 			on_attach = my_on_attach,
 			view = {
