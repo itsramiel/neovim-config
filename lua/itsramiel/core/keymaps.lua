@@ -70,3 +70,7 @@ keymap.set("n", "<leader>pn", "?\\d\\+<CR>", opts)
 
 opts.desc = "Keep cursor position after yanking"
 keymap.set("v", "Y", "ygv<Esc>", opts)
+
+-- Esc maps to <C-[> for some reason which I use to move tabs
+opts.desc = "Map escape to <C-c>"
+keymap.set("n", "<Esc>", "<C-c>")
