@@ -12,5 +12,13 @@ return {
 				vim.wo.winbar = ""
 			end
 		end, opts)
+
+		opts.desc = "Copy json path to clipboard"
+
+		-- send json path to clipboard
+		vim.keymap.set("n", "<leader>yjp", function()
+			local json_path = require("jsonpath").get()
+			vim.fn.setreg("+", json_path:sub(2))
+		end, opts)
 	end,
 }
