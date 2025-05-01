@@ -13,6 +13,11 @@ return {
 
 			-- configure treesitter
 			treesitter.setup({ -- enable syntax highlighting
+				matchup = {
+					enable = true,
+				},
+
+
 				highlight = {
 					enable = true,
 				},
