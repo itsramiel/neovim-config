@@ -7,7 +7,11 @@ return {
 	---@type render.md.UserConfig
 	opts = {},
 	config = function()
-		require("render-markdown").setup()
+		require("render-markdown").setup({
+      latex = {
+        enabled = false
+      }
+    })
 		local opts = { noremap = true, silent = true }
 		local keymap = vim.keymap
 
