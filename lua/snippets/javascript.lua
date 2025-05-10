@@ -82,6 +82,7 @@ return {
 			{
 				c(1, {
 					t("export "),
+					t("export default "),
 					t(""),
 				}),
 				d(2, function(_, parent)
