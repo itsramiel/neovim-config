@@ -67,12 +67,6 @@ return {
 			vim.keymap.set("n", "-", api.tree.change_root_to_parent, opts("Up"))
 			vim.keymap.set("n", "<C-k>", api.node.show_info_popup, opts("Info"))
 			vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
-			-- vim.keymap.set("n", "<C-t>", function()
-			-- 	api.node.open.tab()
-			-- 	vim.cmd("-tabnext")
-			-- 	api.tree.toggle()
-			-- 	vim.cmd("tabnext")
-			-- end, opts("Open in New Tab"))
 			vim.keymap.set("n", "<Tab>", api.node.open.preview, opts("Open Preview"))
 			vim.keymap.set("n", "a", api.fs.create, opts("Create File Or Directory"))
 			vim.keymap.set("n", "P", api.node.navigate.parent, opts("Parent Directory"))
@@ -104,6 +98,9 @@ return {
 			vim.keymap.set("n", "yrp", api.fs.copy.relative_path, opts("Copy Relative Path"))
 			vim.keymap.set("n", "yap", api.fs.copy.absolute_path, opts("Copy Absolute Path"))
 			vim.keymap.set("n", "yy", api.fs.copy.node, opts("Copy"))
+
+			vim.keymap.set("n", "<", api.node.navigate.sibling.prev(), opts("Previous Sibling"))
+			vim.keymap.set("n", ">", api.node.navigate.sibling.next(), opts("Next Sibling"))
 
 			vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
 
