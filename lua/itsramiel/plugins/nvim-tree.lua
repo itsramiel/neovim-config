@@ -99,8 +99,8 @@ return {
 			vim.keymap.set("n", "yap", api.fs.copy.absolute_path, opts("Copy Absolute Path"))
 			vim.keymap.set("n", "yy", api.fs.copy.node, opts("Copy"))
 
-			vim.keymap.set("n", "<", api.node.navigate.sibling.prev(), opts("Previous Sibling"))
-			vim.keymap.set("n", ">", api.node.navigate.sibling.next(), opts("Next Sibling"))
+			vim.keymap.set("n", "<", api.node.navigate.sibling.prev, opts("Previous Sibling"))
+			vim.keymap.set("n", ">", api.node.navigate.sibling.next, opts("Next Sibling"))
 
 			vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
 
