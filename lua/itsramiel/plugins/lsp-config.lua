@@ -79,57 +79,10 @@ return {
 			on_attach = on_attach,
 		})
 
-		-- configure typescript server with plugin
-		lspconfig["ts_ls"].setup({
-			init_options = {
-				preferences = {
-					includeInlayParameterNameHints = "all",
-					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-					includeInlayFunctionParameterTypeHints = false,
-					includeInlayVariableTypeHints = false,
-					includeInlayPropertyDeclarationTypeHints = false,
-					includeInlayFunctionLikeReturnTypeHints = false,
-					includeInlayEnumMemberValueHints = false,
-				},
-			},
+		-- configure html server
+		lspconfig["vtsls"].setup({
 			capabilities = capabilities,
-			on_attach = function(client, bufnr)
-				local function is_flow_project(fname)
-					return lspconfig.util.root_pattern(".flowconfig")(fname) ~= nil
-				end
-
-				if is_flow_project(vim.api.nvim_buf_get_name(bufnr)) == true then
-					-- disable ts_ls if flow project
-					client.stop()
-				else
-					opts.desc = "Organize imports"
-					keymap.set("n", "<leader>oi", function()
-						vim.lsp.buf.execute_command({
-							command = "_typescript.organizeImports",
-							arguments = { vim.api.nvim_buf_get_name(bufnr) },
-						})
-					end, opts) -- show definition, references
-
-					on_attach(client, bufnr)
-				end
-			end,
-			handlers = {
-				["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
-					local diagnostic_codes_to_filter = { 80001, 80005 }
-
-					if result.diagnostics then
-						result.diagnostics = vim.tbl_filter(function(diagnostic)
-							for _, code in ipairs(diagnostic_codes_to_filter) do
-								if diagnostic.code == code then
-									return false
-								end
-							end
-							return true
-						end, result.diagnostics)
-					end
-					vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
-				end,
-			},
+			on_attach = on_attach,
 		})
 
 		-- configure jsonls server with plugin
