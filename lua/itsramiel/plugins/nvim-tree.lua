@@ -9,37 +9,6 @@ return {
 	config = function()
 		local ntree = require("nvim-tree")
 		local api = require("nvim-tree.api")
-		local telescope = require("telescope.builtin")
-
-		--- Absolute paths of the node.
-		--- @return string|nil file node
-		--- @return string|nil dir parent node of file otherwise node
-		local function node_path_dir()
-			local node = api.tree.get_node_under_cursor()
-			if not node then
-				return
-			end
-
-			if node.parent and node.type == "file" then
-				return node.absolute_path, node.parent.absolute_path
-			else
-				return node.absolute_path, node.absolute_path
-			end
-		end
-
-		local function find_files()
-			local _, dir = node_path_dir()
-			if dir then
-				telescope.find_files({ search_dirs = { dir } })
-			end
-		end
-
-		local function live_grep()
-			local _, dir = node_path_dir()
-			if dir then
-				telescope.live_grep({ search_dirs = { dir } })
-			end
-		end
 
 		-- disable netrw at the very start of your init.lua
 		vim.g.loaded_netrw = 1
@@ -105,9 +74,6 @@ return {
 			vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
 
 			vim.keymap.set("n", "p", api.fs.paste, opts("Paste"))
-
-			vim.keymap.set("n", "tf", find_files, opts("Find Files"))
-			vim.keymap.set("n", "tg", live_grep, opts("Live Grep"))
 		end
 
 		-- configure nvim-tree
