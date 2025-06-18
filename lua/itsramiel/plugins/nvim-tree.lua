@@ -32,6 +32,12 @@ return {
 				}
 			end
 
+			-- vim.keymap.set("n", "f", api.live_filter.start, opts("Start Live Filter"))
+			-- vim.keymap.set("n", "F", api.live_filter.clear, opts("Start Live Clear"))
+
+			-- vim.keymap.set("n", "X", api.tree.expand_all, opts("Expand All"))
+			vim.keymap.set("n", "W", api.tree.collapse_all, opts("Collapse All"))
+
 			vim.keymap.set("n", "<C-]>", api.tree.change_root_to_node, opts("CD"))
 			vim.keymap.set("n", "-", api.tree.change_root_to_parent, opts("Up"))
 			vim.keymap.set("n", "<C-k>", api.node.show_info_popup, opts("Info"))
@@ -42,7 +48,6 @@ return {
 			vim.keymap.set("n", "R", api.tree.reload, opts("Refresh"))
 			vim.keymap.set("n", "s", api.node.run.system, opts("Run System"))
 			vim.keymap.set("n", "x", api.fs.cut, opts("Cut"))
-			vim.keymap.set("n", "W", api.tree.collapse_all, opts("Collapse"))
 
 			vim.keymap.set("n", "q", api.tree.close, opts("Close"))
 			vim.keymap.set("n", "g?", api.tree.toggle_help, opts("Help"))
