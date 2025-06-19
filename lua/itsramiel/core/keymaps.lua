@@ -74,3 +74,13 @@ keymap.set("v", "Y", "ygv<Esc>", opts)
 -- Esc maps to <C-[> for some reason which I use to move tabs
 opts.desc = "Map escape to <C-c>"
 keymap.set("n", "<Esc>", "<C-c>")
+
+opts.desc = "Reload nvim config"
+keymap.set("n", "<leader>cr", function()
+	for pkg, _ in pairs(package.loaded) do
+		if pkg:match("^itsramiel.+") then
+			package.loaded[pkg] = nil
+			require(pkg)
+		end
+	end
+end)
