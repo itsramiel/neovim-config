@@ -43,6 +43,16 @@ return {
 			end
 		end
 
+		local open_finder = function(prompt_bufnr)
+			local picker = action_state.get_current_picker(prompt_bufnr)
+			local selection = action_state.get_selected_entry()
+			local cwd = picker.cwd or vim.loop.cwd()
+			local file_path = vim.fs.joinpath(cwd, selection.value)
+			local parent_directory = vim.fs.dirname(file_path)
+
+			vim.ui.open(parent_directory)
+		end
+
 		local custom_actions = transform_mod({
 			restore_file = function(prompt_bufnr)
 				restore_file_action(prompt_bufnr)
@@ -54,8 +64,14 @@ return {
 				path_display = filename_first,
 			},
 			pickers = {
+				find_files = {
+					attach_mappings = function(_, map)
+						map("n", "s", open_finder)
+						return true
+					end,
+				},
 				git_status = {
-					attach_mappings = function(prompt_bufnr, map)
+					attach_mappings = function(_, map)
 						custom_actions.restore_file:enhance({
 							post = function(prompt_bufnr)
 								local picker = action_state.get_current_picker(prompt_bufnr)
@@ -104,6 +120,7 @@ return {
 							end,
 						})
 						map("n", "rs", custom_actions.restore_file)
+						map("n", "s", open_finder)
 						return true
 					end,
 				},
