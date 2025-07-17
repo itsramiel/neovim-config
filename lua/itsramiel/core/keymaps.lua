@@ -84,3 +84,10 @@ keymap.set("n", "<leader>cr", function()
 		end
 	end
 end)
+
+-- terminal
+opts.desc = "Open a terminal"
+keymap.set("n", "<leader>to", ":terminal<CR>")
+
+opts.desc = "Exit terminal mode"
+keymap.set("t", "<Esc>", [[<C-\><C-n>]])
