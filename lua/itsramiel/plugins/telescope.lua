@@ -35,10 +35,11 @@ return {
 			local selection = action_state.get_selected_entry()
 			local cwd = picker.cwd
 			local status = selection.status
+      print(status == " M")
 
-			if status == " D" then
+			if status == " D" or status == " M" then
 				utils.get_os_command_output({ "git", "restore", selection.value }, cwd)
-			elseif status == "D " then
+			elseif status == "D " or status == "M " then
 				utils.get_os_command_output({ "git", "restore", "--staged", selection.value }, cwd)
 			end
 		end
