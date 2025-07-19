@@ -30,12 +30,24 @@ return {
 			end,
 		})
 
+		local copy_relative_file_path = function(_)
+			local selection = action_state.get_selected_entry()
+			vim.fn.setreg("+", selection.value)
+		end
+
+		local copy_absolute_file_path = function(prompt_bufnr)
+			local picker = action_state.get_current_picker(prompt_bufnr)
+			local selection = action_state.get_selected_entry()
+			local cwd = picker.cwd or vim.loop.cwd()
+			local file_path = vim.fs.joinpath(cwd, selection.value)
+			vim.fn.setreg("+", file_path)
+		end
+
 		local restore_file_action = function(prompt_bufnr)
 			local picker = action_state.get_current_picker(prompt_bufnr)
 			local selection = action_state.get_selected_entry()
 			local cwd = picker.cwd
 			local status = selection.status
-      print(status == " M")
 
 			if status == " D" or status == " M" then
 				utils.get_os_command_output({ "git", "restore", selection.value }, cwd)
@@ -68,6 +80,8 @@ return {
 				find_files = {
 					attach_mappings = function(_, map)
 						map("n", "s", open_finder)
+						map("n", "yrp", copy_relative_file_path)
+						map("n", "yap", copy_absolute_file_path)
 						return true
 					end,
 				},
@@ -79,9 +93,6 @@ return {
 								local current_row = picker:get_selection_row()
 								local current_index = picker:get_index(current_row)
 								local total_items = #picker.finder.results
-
-								local selection = action_state.get_selected_entry()
-								local file_name = selection.value
 
 								local callbacks = { unpack(picker._completion_callbacks) }
 								picker:register_completion_callback(function(self)
@@ -121,6 +132,8 @@ return {
 							end,
 						})
 						map("n", "rs", custom_actions.restore_file)
+						map("n", "yrp", copy_relative_file_path)
+						map("n", "yap", copy_absolute_file_path)
 						map("n", "s", open_finder)
 						return true
 					end,
