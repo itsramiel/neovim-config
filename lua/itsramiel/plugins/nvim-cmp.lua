@@ -1,19 +1,12 @@
 return {
 	"hrsh7th/nvim-cmp",
-	event = "InsertEnter",
 	dependencies = {
+		"hrsh7th/cmp-nvim-lsp", -- source for nvim-lsp
 		"hrsh7th/cmp-buffer", -- source for text in buffer
 		"hrsh7th/cmp-path", -- source for file system paths
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip", -- for autocompletion
 	},
-	opts = function(_, opts)
-		opts.sources = opts.sources or {}
-		table.insert(opts.sources, {
-			name = "lazydev",
-			group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-		})
-	end,
 	config = function()
 		local cmp = require("cmp")
 
@@ -39,6 +32,28 @@ return {
 				{ name = "buffer" }, -- text within current buffer
 				{ name = "path" }, -- file system paths
 			}),
+		})
+
+		-- If file is huge disable cmp
+		local bufIsBig = function(bufnr)
+			local max_filesize = 100 * 1024 -- 100 KB
+			local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(bufnr))
+			if ok and stats and stats.size > max_filesize then
+				return true
+			else
+				return false
+			end
+		end
+
+		vim.api.nvim_create_autocmd("BufReadPre", {
+			callback = function(t)
+				if bufIsBig(t.buf) then
+					print("❗⚠️cmp disabled beacuse file is too big⚠️❗")
+					cmp.setup.buffer({
+						enabled = false,
+					})
+				end
+			end,
 		})
 	end,
 }
