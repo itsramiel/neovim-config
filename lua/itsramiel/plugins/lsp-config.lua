@@ -5,9 +5,6 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
-    -- import lspconfig plugin
-    local lspconfig = require("lspconfig")
-
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -40,10 +37,14 @@ return {
       keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
       opts.desc = "Go to previous diagnostic"
-      keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+      keymap.set("n", "[d", function()
+        vim.diagnostic.jump({ count = -1, float = true })
+      end, opts) -- jump to previous diagnostic in buffer
 
       opts.desc = "Go to next diagnostic"
-      keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+      keymap.set("n", "]d", function()
+        vim.diagnostic.jump({ count = 1, float = true })
+      end, opts) -- jump to next diagnostic in buffer
 
       opts.desc = "Show documentation for what is under cursor"
       keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
@@ -79,34 +80,39 @@ return {
     })
 
     -- configure html server
-    lspconfig["html"].setup({
+    vim.lsp.enable("html")
+    vim.lsp.config["html"] = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
     -- configure html server
-    lspconfig["vtsls"].setup({
+    vim.lsp.enable("ts_ls")
+    vim.lsp.config["ts_ls"] = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
     -- configure jsonls server with plugin
-    lspconfig["jsonls"].setup({
+    vim.lsp.enable("jsonls")
+    vim.lsp.config["jsonls"].setup = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
     -- configure eslint server with plugin
-    lspconfig["eslint"].setup({
+    vim.lsp.enable("eslint")
+    vim.lsp.config["eslint"].setup = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
     -- configure css server
-    lspconfig["cssls"].setup({
+    vim.lsp.enable("cssls")
+    vim.lsp.config["cssls"].setup = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
     --
     -- configure kotlin server
     vim.lsp.enable("kotlin_lsp")
@@ -116,43 +122,50 @@ return {
     }
 
     -- configure cpp server
-    lspconfig["clangd"].setup({
+    vim.lsp.enable("clangd")
+    vim.lsp.config["clangd"].setup = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
     -- configure graphql language server
-    lspconfig["graphql"].setup({
+    vim.lsp.enable("graphql")
+    vim.lsp.config["graphql"].setup = {
       capabilities = capabilities,
       on_attach = on_attach,
       filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-    })
+    }
 
     -- configure cmake language server
-    lspconfig["cmake"].setup({
+    vim.lsp.enable("cmake")
+    vim.lsp.config["cmake"].setup = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
     -- configure flow language server
-    lspconfig["flow"].setup({
+    vim.lsp.enable("flow")
+    vim.lsp.config["flow"].setup = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
     -- configure flow language server
-    lspconfig["sourcekit"].setup({
+    vim.lsp.enable("sourcekit")
+    vim.lsp.config["sourcekit"].setup = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
-    lspconfig["yamlls"].setup({
+    vim.lsp.enable("yamlls")
+    vim.lsp.config["yamlls"].setup = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
     -- configure lua server (with special settings)
-    lspconfig["lua_ls"].setup({
+    vim.lsp.enable("lua_ls")
+    vim.lsp.config["lua_ls"].setup = {
       capabilities = capabilities,
       on_attach = on_attach,
       on_init = function(client)
@@ -184,6 +197,6 @@ return {
       settings = {
         Lua = {},
       },
-    })
+    }
   end,
 }
