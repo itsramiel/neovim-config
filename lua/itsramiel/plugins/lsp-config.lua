@@ -145,13 +145,6 @@ return {
 		}
 
 		-- configure flow language server
-		vim.lsp.enable("flow")
-		vim.lsp.config["flow"].setup = {
-			capabilities = capabilities,
-			on_attach = on_attach,
-		}
-
-		-- configure flow language server
 		vim.lsp.enable("sourcekit")
 		vim.lsp.config["sourcekit"].setup = {
 			capabilities = capabilities,
