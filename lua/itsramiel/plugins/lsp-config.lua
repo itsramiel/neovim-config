@@ -12,7 +12,6 @@ return {
 
 		local opts = { noremap = true, silent = true }
 		local on_attach = function(client, bufnr)
-			print("on_attach")
 			opts.buffer = bufnr
 
 			-- set keybinds
