@@ -95,21 +95,21 @@ return {
 
 		-- configure jsonls server with plugin
 		vim.lsp.enable("jsonls")
-		vim.lsp.config["jsonls"].setup = {
+		vim.lsp.config["jsonls"] = {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		}
 
 		-- configure eslint server with plugin
 		vim.lsp.enable("eslint")
-		vim.lsp.config["eslint"].setup = {
+		vim.lsp.config["eslint"] = {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		}
 
 		-- configure css server
 		vim.lsp.enable("cssls")
-		vim.lsp.config["cssls"].setup = {
+		vim.lsp.config["cssls"] = {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		}
@@ -123,14 +123,14 @@ return {
 
 		-- configure cpp server
 		vim.lsp.enable("clangd")
-		vim.lsp.config["clangd"].setup = {
+		vim.lsp.config["clangd"] = {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		}
 
 		-- configure graphql language server
 		vim.lsp.enable("graphql")
-		vim.lsp.config["graphql"].setup = {
+		vim.lsp.config["graphql"] = {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
@@ -138,20 +138,20 @@ return {
 
 		-- configure cmake language server
 		vim.lsp.enable("cmake")
-		vim.lsp.config["cmake"].setup = {
+		vim.lsp.config["cmake"] = {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		}
 
 		-- configure flow language server
 		vim.lsp.enable("sourcekit")
-		vim.lsp.config["sourcekit"].setup = {
+		vim.lsp.config["sourcekit"] = {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		}
 
 		vim.lsp.enable("yamlls")
-		vim.lsp.config["yamlls"].setup = {
+		vim.lsp.config["yamlls"] = {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		}
