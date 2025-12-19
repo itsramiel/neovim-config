@@ -27,10 +27,7 @@ return {
     opts.desc = "Shuts down all virtual devices(iOS & Android)"
     keymap.set("n", "<leader>ssx", sim_ui.shutdown.shutdown_all_virtual_devices, opts)
 
-    opts.desc = "List Android Virtual Devices to perform an action on"
-    keymap.set("n", "<leader>sla", sim_ui.list_virtual_devices.list_android_virtual_devices, opts)
-
-    opts.desc = "List iOS Virtual Devices to perform an action on"
-    keymap.set("n", "<leader>sli", sim_ui.list_virtual_devices.list_ios_virtual_devices, opts)
+    opts.desc = "List devices to perform an action on"
+    keymap.set("n", "<leader>sl", sim_ui.list_devices.list_all, opts)
   end,
 }
