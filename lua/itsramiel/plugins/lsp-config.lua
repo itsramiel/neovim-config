@@ -10,13 +10,35 @@ return {
 
 		local keymap = vim.keymap -- for conciseness
 
+		local function format_and_save()
+			vim.lsp.buf.format({
+				filter = function(client)
+					if client.name == "eslint" then
+						return true
+					end
+					if client.name == "ts_ls" then
+						return #vim.lsp.get_clients({
+							bufnr = 0,
+							name = "eslint",
+							method = "textDocument/formatting",
+						}) == 0
+					end
+					return true
+				end,
+			})
+
+			vim.cmd.write()
+		end
+
 		local opts = { noremap = true, silent = true }
 		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
 
 			-- set keybinds
 			opts.desc = "Format and save"
-			keymap.set("n", "<leader>w", "<cmd>lua vim.lsp.buf.format()<CR><cmd>:w<CR>", opts) -- show definition, references
+			keymap.set("n", "<leader>w", function()
+				format_and_save()
+			end, opts) -- show definition, references
 
 			opts.desc = "Show LSP references"
 			keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
