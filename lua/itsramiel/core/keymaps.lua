@@ -54,12 +54,12 @@ keymap.set("n", "<leader>ss", "<C-W>R")
 
 opts.desc = "Jump to next non-whitespace matching indentation"
 keymap.set({ "n", "v" }, "<M-,>", function()
-	vim.cmd("call search('^'. matchstr(getline('.'), '\\(^\\s*\\)') .'\\%<' . line('.') . 'l\\S', 'be')")
+  vim.cmd("call search('^'. matchstr(getline('.'), '\\(^\\s*\\)') .'\\%<' . line('.') . 'l\\S', 'be')")
 end, opts)
 
 opts.desc = "Jump to previous non-whitespace matching indentation"
 keymap.set({ "n", "v" }, "<M-.>", function()
-	vim.cmd("call search('^'. matchstr(getline('.'), '\\(^\\s*\\)') .'\\%>' . line('.') . 'l\\S', 'e')")
+  vim.cmd("call search('^'. matchstr(getline('.'), '\\(^\\s*\\)') .'\\%>' . line('.') . 'l\\S', 'e')")
 end, opts)
 
 -- Jump to the next/precious number
@@ -77,12 +77,12 @@ keymap.set("n", "<Esc>", "<C-c>")
 
 opts.desc = "Reload nvim config"
 keymap.set("n", "<leader>cr", function()
-	for pkg, _ in pairs(package.loaded) do
-		if pkg:match("^itsramiel.+") then
-			package.loaded[pkg] = nil
-			require(pkg)
-		end
-	end
+  for pkg, _ in pairs(package.loaded) do
+    if pkg:match("^itsramiel.+") then
+      package.loaded[pkg] = nil
+      require(pkg)
+    end
+  end
 end)
 
 -- terminal
@@ -91,3 +91,9 @@ keymap.set("n", "<leader>to", ":terminal<CR>")
 
 opts.desc = "Exit terminal mode"
 keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+
+opts.desc = "Toggle wrap"
+keymap.set("n", "<leader>tw", function()
+  local wrap_enabled = vim.wo.wrap
+  vim.wo.wrap = not wrap_enabled
+end)
