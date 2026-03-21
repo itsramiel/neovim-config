@@ -123,10 +123,8 @@ return {
             includeInlayParameterNameHints = "all",
             includeInlayParameterNameHintsWhenArgumentMatchesName = false,
             includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
             includeInlayPropertyDeclarationTypeHints = true,
             includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
           },
         },
         javascript = {
@@ -134,10 +132,8 @@ return {
             includeInlayParameterNameHints = "all",
             includeInlayParameterNameHintsWhenArgumentMatchesName = false,
             includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
             includeInlayPropertyDeclarationTypeHints = true,
             includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
           },
         },
       },
@@ -163,10 +159,17 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
     }
-    --
+
     -- configure kotlin server
     vim.lsp.enable("kotlin_lsp")
     vim.lsp.config["kotlin_lsp"] = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+
+    -- configure gradle server
+    vim.lsp.enable("gradle_ls")
+    vim.lsp.config["gradle_ls"] = {
       capabilities = capabilities,
       on_attach = on_attach,
     }
