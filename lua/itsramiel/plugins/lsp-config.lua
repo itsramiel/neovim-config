@@ -159,6 +159,13 @@ return {
       on_attach = on_attach,
     }
 
+    -- configure latex server
+    vim.lsp.enable("texlab")
+    vim.lsp.config["texlab"] = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+
     -- configure gradle server
     vim.lsp.enable("gradle_ls")
     vim.lsp.config["gradle_ls"] = {
