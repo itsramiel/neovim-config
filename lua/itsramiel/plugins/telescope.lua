@@ -74,7 +74,7 @@ return {
       },
       pickers = {
         find_files = {
-          hidden = true,
+          find_command = { "rg", "--files", "--color", "never", "--hidden", "--glob", "!**/.git/*" },
           attach_mappings = function(_, map)
             map("n", "s", open_finder)
             map("n", "yrp", copy_relative_file_path)
