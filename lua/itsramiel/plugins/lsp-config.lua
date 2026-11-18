@@ -19,8 +19,13 @@ return {
 
       opts.buffer = bufnr
 
+      local telescope = require("telescope.builtin")
+
       opts.desc = "Show LSP references"
-      keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+      keymap.set("n", "gR", telescope.lsp_references, opts) -- show definition, references
+
+      opts.desc = "Show LSP outgoing calls"
+      keymap.set("n", "<leader>lsc", telescope.lsp_incoming_calls, opts) -- show calls for function under cursor
 
       opts.desc = "Show LSP definitions"
       keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- show lsp definitions
