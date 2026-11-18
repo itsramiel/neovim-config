@@ -195,6 +195,13 @@ return {
       on_attach = on_attach,
     }
 
+    -- configure harper language server
+    vim.lsp.enable("harper_ls")
+    vim.lsp.config["harper_ls"] = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+
     -- configure flow language server
     vim.lsp.enable("sourcekit")
     vim.lsp.config["sourcekit"] = {
