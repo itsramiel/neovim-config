@@ -180,6 +180,13 @@ return {
     vim.lsp.config["harper_ls"] = {
       capabilities = capabilities,
       on_attach = on_attach,
+      settings = {
+        ["harper-ls"] = {
+          linters = {
+            LongSentences = false,
+          }
+        }
+      }
     }
 
     -- configure flow language server
