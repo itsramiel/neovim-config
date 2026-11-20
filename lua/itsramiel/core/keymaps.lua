@@ -75,15 +75,92 @@ keymap.set("v", "Y", "ygv<Esc>", opts)
 opts.desc = "Map escape to <C-c>"
 keymap.set("n", "<Esc>", "<C-c>")
 
-opts.desc = "Reload nvim config"
-keymap.set("n", "<leader>cr", function()
-  for pkg, _ in pairs(package.loaded) do
-    if pkg:match("^itsramiel.+") then
-      package.loaded[pkg] = nil
-      require(pkg)
-    end
+---@class CodeColumns
+---@field start_col integer Character column where the selection starts, counted from 1.
+---@field end_col integer Character column where the selection ends, counted from 1 and inclusive.
+
+---@class CodeRange
+---@field start_line integer
+---@field end_line integer
+---@field columns? CodeColumns Set only for a charwise selection within one line that doesn't span the whole line.
+
+---@param line string
+---@param byte_col integer Byte column, counted from 1.
+---@return integer char_col Character column, counted from 1.
+local function to_char_col(line, byte_col)
+  -- In visual mode, `$` puts the cursor one byte past the end of the line.
+  local clamped = math.min(byte_col, #line)
+  return vim.fn.charidx(line, clamped - 1) + 1
+end
+
+-- Returns nil when the selection spans the whole line, so the reference carries no columns.
+---@param line_nr integer
+---@param start_byte integer
+---@param end_byte integer
+---@return CodeColumns?
+local function column_range(line_nr, start_byte, end_byte)
+  local line = vim.fn.getline(line_nr)
+  local start_col = to_char_col(line, start_byte)
+  local end_col = to_char_col(line, end_byte)
+  if start_col <= 1 and end_col >= vim.fn.strchars(line) then
+    return nil
   end
-end)
+  return { start_col = start_col, end_col = end_col }
+end
+
+-- Returns the line range of the visual selection, or of the cursor line outside visual mode.
+-- A char wise selection within one line also gets a column range.
+---@return CodeRange
+local function current_range()
+  local cursor = vim.fn.getpos(".")
+  local mode = vim.fn.mode()
+  if mode ~= "v" and mode ~= "V" and mode ~= "\22" then
+    return { start_line = cursor[2], end_line = cursor[2] }
+  end
+
+  local start_pos, end_pos = vim.fn.getpos("v"), cursor
+  if start_pos[2] > end_pos[2] or (start_pos[2] == end_pos[2] and start_pos[3] > end_pos[3]) then
+    start_pos, end_pos = end_pos, start_pos
+  end
+
+  ---@type CodeRange
+  local range = { start_line = start_pos[2], end_line = end_pos[2] }
+  if mode == "v" and range.start_line == range.end_line then
+    range.columns = column_range(range.start_line, start_pos[3], end_pos[3])
+  end
+  return range
+end
+
+---@param path string
+---@param range CodeRange
+---@return string
+local function format_reference(path, range)
+  local reference = path .. ":" .. range.start_line
+  if range.end_line ~= range.start_line then
+    return reference .. "-" .. range.end_line
+  end
+  local columns = range.columns
+  if columns then
+    return reference .. ":" .. columns.start_col .. "-" .. columns.end_col
+  end
+  return reference
+end
+
+local function copy_code_reference()
+  if vim.bo.buftype ~= "" or vim.api.nvim_buf_get_name(0) == "" then
+    vim.notify("No file to reference", vim.log.levels.WARN)
+    return
+  end
+
+  local path = vim.fn.expand("%:~:.")
+  vim.fn.setreg("+", format_reference(path, current_range()))
+  if vim.fn.mode() ~= "n" then
+    vim.api.nvim_feedkeys(vim.keycode("<Esc>"), "nx", false)
+  end
+end
+
+opts.desc = "Copy code reference to clipboard"
+keymap.set({ "n", "v" }, "<leader>cr", copy_code_reference, opts)
 
 -- terminal
 opts.desc = "Open a terminal"
